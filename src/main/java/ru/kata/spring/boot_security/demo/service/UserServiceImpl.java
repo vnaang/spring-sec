@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserDao userDao;
 
     public UserServiceImpl(UserDao userDao) {
@@ -42,4 +43,13 @@ public class UserServiceImpl implements UserService {
         userDao.updateUser(user);
     }
 
+    @Override
+    public User getUserByUserName(String userName) {
+        return userDao.getUserByUserName(userName);
+    }
+
+    @Override
+    public void dropPassword(User user) {
+        user.setPassword(null);
+    }
 }

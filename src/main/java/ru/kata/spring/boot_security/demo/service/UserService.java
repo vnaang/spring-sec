@@ -16,4 +16,8 @@ public interface UserService {
     User getUserById(Long id);
 
     void updateUser(User user);
+
+    User getUserByUserName(String userName);
+
+    void dropPassword(User user);
 }

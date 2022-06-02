@@ -13,7 +13,6 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Override
     public void add(User user) {
         entityManager.persist(user);
@@ -39,5 +38,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void updateUser(User user) {
         entityManager.merge(user);
+    }
+
+    @Override
+    public User getUserByUserName(String userName) {
+      return   entityManager.createQuery("FROM User u WHERE u.userName =:userName", User.class).setParameter("userName", userName).getSingleResult();
     }
 }

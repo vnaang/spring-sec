@@ -31,6 +31,7 @@ public class User implements Serializable, UserDetails {
 
     private String password;
 
+    @Column(name = "user_name")
     private String userName;
 
     @Fetch(FetchMode.JOIN)
