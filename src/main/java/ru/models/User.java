@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.models;
+package ru.models;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(schema = "db_pred_prod", name = "users")
-public class User implements Serializable, UserDetails {
+public class User implements UserDetails, Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +38,8 @@ public class User implements Serializable, UserDetails {
     @Fetch(FetchMode.JOIN)
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles = new HashSet<>();
 
     public User() {
@@ -93,9 +94,6 @@ public class User implements Serializable, UserDetails {
         this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
-    }
 
     public void setUserName(String userName) {
         this.userName = userName;

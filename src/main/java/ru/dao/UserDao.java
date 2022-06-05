@@ -1,12 +1,12 @@
-package ru.kata.spring.boot_security.demo.service;
+package ru.dao;
 
 
 
-import ru.kata.spring.boot_security.demo.models.User;
+import ru.models.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserDao {
     void add(User user);
 
     void removeUserById(Long id);
@@ -18,6 +18,4 @@ public interface UserService {
     void updateUser(User user);
 
     User getUserByUserName(String userName);
-
-    void dropPassword(User user);
 }

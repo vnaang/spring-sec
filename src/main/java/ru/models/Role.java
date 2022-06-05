@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.models;
+package ru.models;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(schema = "db_pred_prod, name = roles")
+@Table(schema = "db_pred_prod", name ="roles")
 public class Role implements GrantedAuthority {
 
     @Id
@@ -17,7 +17,7 @@ public class Role implements GrantedAuthority {
     private Long id;
 
     @Fetch(FetchMode.JOIN)
-    @ManyToMany
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
 
     private String role;
@@ -58,5 +58,10 @@ public class Role implements GrantedAuthority {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return role;
     }
 }
